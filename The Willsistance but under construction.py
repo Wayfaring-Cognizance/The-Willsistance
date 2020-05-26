@@ -28,20 +28,7 @@ seven_players_all_roles = ['Will Smith on Youtube - Bad','Will Smith Genie - Bad
 
 
 def game_info():
-    global players
-    global roles
-    global player_one
-    global player_two
-    global player_three
-    global player_four
-    global player_five
-    global player_six
-    global player_seven
-    global player_eight
-    global player_nine
-    global player_ten
     global player_list
-    
     players = int(input('How many people are playing? '))
     roles = int(input('''Please select an option:
                   1. Merlin, Morgana, Percival
@@ -59,13 +46,25 @@ def game_info():
     player_eight = input('Player Eight: ')
     player_nine = input('Player Nine: ')
     player_ten = input('Player Ten: ')
-    player_list = [player_one, player_two, player_three, player_four, player_five, player_six, player_seven, player_eight, player_nine, player_ten]
+    if players == 10:
+        player_list = [player_one, player_two, player_three, player_four, player_five, player_six, player_seven, player_eight, player_nine, player_ten]
+    elif players == 9:
+        player_list = [player_one, player_two, player_three, player_four, player_five, player_six, player_seven, player_eight, player_nine]
+    elif players == 8:
+        player_list = [player_one, player_two, player_three, player_four, player_five, player_six, player_seven, player_eight]
+    elif players == 7:
+        player_list = [player_one, player_two, player_three, player_four, player_five, player_six, player_seven]
+    elif players == 6:
+        player_list = [player_one, player_two, player_three, player_four, player_five, player_six]
+    else:
+        player_list = [player_one, player_two, player_three, player_four, player_five]
+
 
 def player_assignments():
-    global assignments
+    if players == 10 and roles
+    random.shuffle(ten_players_no_special)
     assignments = {ten_players_no_special[i]: player_list[i] for i in range(len(ten_players_no_special))}
     assignments = [(k, v) for k, v in assignments.items()]
-    random.shuffle(assignments)
     print (str(assignments))
 
 game_info ()
