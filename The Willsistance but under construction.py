@@ -98,7 +98,7 @@ def game_info():
         player_two = input('Player Two: ')
         player_three = input('Player Three: ')
         player_four = input('Player Four: ')
-        player_five = input('Player Five: ')
+        player_five = input('Player Five:')
         player_list = [player_one, player_two, player_three, player_four, player_five]
 
 
@@ -109,7 +109,8 @@ def player_assignments():
         random.shuffle(roles)
         assignments = zip(roles, player_list)
         money_shot = list(assignments)
-        print(list(money_shot))
+        for assn in money_shot:
+            print("\n{0} : {1}\r\n".format(assn[0],assn[1]))
     elif special_roles == 3:
         roles = (Good_Roles + bad_special_roles) 
         roles.append('The Fresh Prince - Good')
@@ -119,7 +120,8 @@ def player_assignments():
         random.shuffle(roles)
         assignments = zip(roles, player_list)
         money_shot = list(assignments)
-        print(list(money_shot))
+        for assn in money_shot:
+            print("\n{0} : {1}\r\n".format(assn[0],assn[1]))
     elif special_roles == 2: #Deadshot (The Assassin for Willsistance) is not added here, which annoys me, but if he is added there will be too many spies for 6 and 5 player games. 
         roles = (Good_Roles + Bad_Roles)
         roles.append('The Fresh Prince - Good')
@@ -133,7 +135,8 @@ def player_assignments():
         random.shuffle(roles)
         assignments = zip(roles, player_list)
         money_shot = list(assignments)
-        print(list(money_shot))
+        for assn in money_shot:
+            print("\n{0} : {1}\r\n".format(assn[0],assn[1]))
     else:
         roles = (Good_Roles + Bad_Roles)
         roles.append('The Fresh Prince - Good')
@@ -147,7 +150,8 @@ def player_assignments():
         random.shuffle(roles)
         assignments = zip(roles, player_list)
         money_shot = list(assignments)
-        print(list(money_shot))
+        for assn in money_shot:
+            print("\n{0} : {1}\r\n".format(assn[0],assn[1]))
         
 
 game_info ()
