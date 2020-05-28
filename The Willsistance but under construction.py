@@ -5,7 +5,6 @@ Bad_Roles = ['Get Jiggy Pharoh - Bad','Gemini - Bad','After Earth - Bad', 'Shark
 bad_special_roles = ['Will Smith Genie - Bad', 'Hancock - Bad', 'Deadshot - Bad', 'Will Smith on Youtube - Bad']#ended up needing this or deadshot, along with ten players needing 4 speis, cause a lot of trouble
 
 def game_info():
-    global player_list
     global special_roles
     players = int(input('How many people are playing? '))
     special_roles = int(input('''Please select an option:
@@ -14,58 +13,19 @@ def game_info():
                   3. All roles
                   4. No special roles
                   '''))
-
-    if players == 10:
-        player_one = input('Player One: ')
-        player_two = input('Player Two: ')
-        player_three = input('Player Three: ')
-        player_four = input('Player Four: ')
-        player_five = input('Player Five: ')
-        player_six = input('Player Six: ')
-        player_seven = input('Player Seven: ')
-        player_eight = input('Player Eight: ')
-        player_nine = input('Player Nine: ')
-        player_ten = input('Player Ten: ')
-        player_list = [player_one, player_two, player_three, player_four, player_five, player_six, player_seven, player_eight, player_nine, player_ten]
-    elif players == 9:
+    player_list = []
+    if players == 9:
         bad_special_roles.remove ('Deadshot - Bad')
         Bad_Roles.remove('Gemini - Bad')
-        player_one = input('Player One: ')
-        player_two = input('Player Two: ')
-        player_three = input('Player Three: ')
-        player_four = input('Player Four: ')
-        player_five = input('Player Five: ')
-        player_six = input('Player Six: ')
-        player_seven = input('Player Seven: ')
-        player_eight = input('Player Eight: ')
-        player_nine = input('Player Nine: ')
-        player_list = [player_one, player_two, player_three, player_four, player_five, player_six, player_seven, player_eight, player_nine]
     elif players == 8:
         bad_special_roles.remove ('Deadshot - Bad')
         Bad_Roles.remove('Gemini - Bad')
         Good_Roles.remove('The bird from his new movie - Good')
-        player_one = input('Player One: ')
-        player_two = input('Player Two: ')
-        player_three = input('Player Three: ')
-        player_four = input('Player Four: ')
-        player_five = input('Player Five: ')
-        player_six = input('Player Six: ')
-        player_seven = input('Player Seven: ')
-        player_eight = input('Player Eight: ')
-        player_list = [player_one, player_two, player_three, player_four, player_five, player_six, player_seven, player_eight]
     elif players == 7:
         bad_special_roles.remove ('Deadshot - Bad')
         Bad_Roles.remove('Gemini - Bad')
         Good_Roles.remove('I,Robot - Good')
         Good_Roles.remove('The bird from his new movie - Good')
-        player_one = input('Player One: ')
-        player_two = input('Player Two: ')
-        player_three = input('Player Three: ')
-        player_four = input('Player Four: ')
-        player_five = input('Player Five: ')
-        player_six = input('Player Six: ')
-        player_seven = input('Player Seven: ')
-        player_list = [player_one, player_two, player_three, player_four, player_five, player_six, player_seven]
     elif players <= 6 and special_roles == 3:
         print('Sorry, that does not work, please try more players or less roles')
         exit() #is there a better program termination to use?
@@ -76,17 +36,10 @@ def game_info():
         Bad_Roles.remove('Gemini - Bad')
         Good_Roles.remove('I,Robot - Good')
         Good_Roles.remove('The bird from his new movie - Good')
-        player_one = input('Player One: ')
-        player_two = input('Player Two: ')
-        player_three = input('Player Three: ')
-        player_four = input('Player Four: ')
-        player_five = input('Player Five: ')
-        player_six = input('Player Six: ')
-        player_list = [player_one, player_two, player_three, player_four, player_five, player_six]
     elif players <= 5 and special_roles == 3:
         print('Sorry, that does not work, please try more players or less roles')
         exit() #is there a better program termination to use?
-    else:
+    elif players == 5:
         bad_special_roles.remove ('Deadshot - Bad')
         bad_special_roles.remove ('Will Smith on Youtube - Bad')
         Bad_Roles.remove('After Earth - Bad')
@@ -94,34 +47,21 @@ def game_info():
         Good_Roles.remove('I,Robot - Good')
         Good_Roles.remove('The bird from his new movie - Good')
         Good_Roles.remove('Dr. Hitchens - Good')
-        player_one = input('Player One: ')
-        player_two = input('Player Two: ')
-        player_three = input('Player Three: ')
-        player_four = input('Player Four: ')
-        player_five = input('Player Five:')
-        player_list = [player_one, player_two, player_three, player_four, player_five]
+    while len(player_list) < players:
+        player = input("Enter player " + str(len(player_list) + 1) + "'s name: ")
+        player_list.append(player) 
+    return player_list
 
-
-def player_assignments():
+def player_assignments(player_list):
 
     if special_roles == 4:
         roles =  (Good_Roles + Bad_Roles)
-        random.shuffle(roles)
-        assignments = zip(roles, player_list)
-        money_shot = list(assignments)
-        for assn in money_shot:
-            print("\n{0} : {1}\r\n".format(assn[0],assn[1]))
     elif special_roles == 3:
         roles = (Good_Roles + bad_special_roles) 
         roles.append('The Fresh Prince - Good')
         roles.append('Miami Will - Good')
         roles.remove('Independence Day Will - Good')
         roles.remove('Jim West - Good')
-        random.shuffle(roles)
-        assignments = zip(roles, player_list)
-        money_shot = list(assignments)
-        for assn in money_shot:
-            print("\n{0} : {1}\r\n".format(assn[0],assn[1]))
     elif special_roles == 2: #Deadshot (The Assassin for Willsistance) is not added here, which annoys me, but if he is added there will be too many spies for 6 and 5 player games. 
         roles = (Good_Roles + Bad_Roles)
         roles.append('The Fresh Prince - Good')
@@ -132,11 +72,6 @@ def player_assignments():
         roles.remove('Jim West - Good')
         roles.remove('Shark Tale Character - Bad')
         roles.remove('Get Jiggy Pharoh - Bad')
-        random.shuffle(roles)
-        assignments = zip(roles, player_list)
-        money_shot = list(assignments)
-        for assn in money_shot:
-            print("\n{0} : {1}\r\n".format(assn[0],assn[1]))
     else:
         roles = (Good_Roles + Bad_Roles)
         roles.append('The Fresh Prince - Good')
@@ -147,13 +82,13 @@ def player_assignments():
         roles.remove('Jim West - Good')
         roles.remove('Shark Tale Character - Bad')
         roles.remove('Get Jiggy Pharoh - Bad')
-        random.shuffle(roles)
-        assignments = zip(roles, player_list)
-        money_shot = list(assignments)
-        for assn in money_shot:
-            print("\n{0} : {1}\r\n".format(assn[0],assn[1]))
+    random.shuffle(roles)
+    assignments = zip(roles, player_list)
+    money_shot = list(assignments)
+    for assn in money_shot:
+        print("\n{0} : {1}\r\n".format(assn[0],assn[1]))
         
 
-game_info ()
-player_assignments ()
+player_list = game_info ()
+player_assignments (player_list)
 
