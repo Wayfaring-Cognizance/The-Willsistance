@@ -35,14 +35,13 @@ def good_and_bad(player_list):
         
 #Turned out to be useful for assigning special spy roles. (We got Deadshot now! xD)
 def dirty_spies(roles):
-    spies = 0
+    def dirty_spies(roles):
     if len(roles) == 10:
-        spies += 4
+        return 4
     elif len(roles) >= 7:
-        spies += 3
+        return 3
     else:
-        spies += 2
-    return spies
+        return 2
 
 #Finishing touches and meat of program
 def player_assignments(player_list):
