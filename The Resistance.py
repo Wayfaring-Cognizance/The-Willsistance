@@ -58,7 +58,7 @@ def player_assignments(player_list):
             del roles[-4:]
         elif spies == 3:
             del roles[-3:]
-            bad_special_roles.remove('Deadshot - Bad')
+            del bad_special_roles[1]
         elif spies == 2:
             print('Sorry, but you can\'t have all roles with this few players. Please re-run program with a different special role selection.')
             exit()
@@ -66,7 +66,8 @@ def player_assignments(player_list):
         del roles[0:2]
     elif special_roles == 2:
         if spies == 2:
-            del roles[-2]
+            del roles[-2:]
+            del bad_special_roles[1]
         else:
             del roles[-3:]
         roles = (roles + good_special_roles + bad_special_roles[:-1])
