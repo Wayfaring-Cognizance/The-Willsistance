@@ -46,8 +46,6 @@ def dirty_spies(roles):
 
 #Finishing touches and meat of program
 def player_assignments(player_list):
-    global roles
-    global spies
     special_roles = int(input('''Please select an option:
                   1. Merlin, Morgana, Percival
                   2. Merlin, Morgana, Percival, Mordred
