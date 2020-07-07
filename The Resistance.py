@@ -16,66 +16,52 @@ def game_info():
         player = input("Enter player " + str(len(player_list) + 1) + "'s name: ")
         player_list.append(player) 
     return player_list
-
-#Tryin real hard to get technical but still needed if and elifs for 10-5 players
-def good_and_bad(player_list):
-    if len(player_list) == 10:
-        roles = (Good_Roles[0:6] + Bad_Roles[0:4])
-    elif len(player_list) == 9:
-        roles = (Good_Roles[0:6] + Bad_Roles[0:3])
-    elif len(player_list) == 8:
-        roles = (Good_Roles[0:5] + Bad_Roles[0:3])
-    elif len(player_list) == 7:
-        roles = (Good_Roles[0:4] + Bad_Roles[0:3])
-    elif len(player_list) == 6:
-        roles = (Good_Roles[0:4] + Bad_Roles[0:2])
-    elif len(player_list) == 5:
-        roles = (Good_Roles[0:3] + Bad_Roles[0:2])
-    return roles
         
 #Turned out to be useful for assigning special spy roles. (We got Deadshot now! xD)
-def dirty_spies(roles):
-    def dirty_spies(roles):
-    if len(roles) == 10:
+def dirty_spies(players):
+    if len(players) == 10:
         return 4
-    elif len(roles) >= 7:
+    elif len(players) >= 7:
         return 3
     else:
         return 2
 
 #Finishing touches and meat of program
 def player_assignments(player_list):
+    global spies
     special_roles = int(input('''Please select an option:
                   1. Merlin, Morgana, Percival
                   2. Merlin, Morgana, Percival, Mordred
                   3. All roles
                   4. No special roles
                   '''))
-    roles = good_and_bad(player_list)
-    spies = dirty_spies(roles)
-    if special_roles == 3:
-        if spies == 4:
-            del roles[-4:]
-        elif spies == 3:
-            del roles[-3:]
+    
+    spies = dirty_spies(player_list)
+    num_good = len(player_list) - spies
+    random.shuffle(Good_Roles)
+    random.shuffle(Bad_Roles)
+    if special_roles == 4:
+        roles = (Good_Roles[0:num_good] + Bad_Roles[0:spies])
+    elif special_roles == 3:
+        num_good -= 2
+        if spies == 3:
             del bad_special_roles[1]
         elif spies == 2:
             print('Sorry, but you can\'t have all roles with this few players. Please re-run program with a different special role selection.')
             exit()
-        roles = (roles + good_special_roles + bad_special_roles)
-        del roles[0:2]
+        roles = (good_special_roles + bad_special_roles) + Good_Roles[0:num_good]
     elif special_roles == 2:
+        num_good -= 2
         if spies == 2:
-            del roles[-2:]
             del bad_special_roles[1]
+            spies -= 2
         else:
-            del roles[-3:]
-        roles = (roles + good_special_roles + bad_special_roles[:-1])
-        del roles[0:2]
+            spies -= 3
+        roles = (good_special_roles + bad_special_roles[:-1]) + (Good_Roles[0:num_good] + Bad_Roles[0:spies])
     elif special_roles == 1:
-        del roles[-2:]
-        roles = (roles + good_special_roles + bad_special_roles[:-2])
-        del roles[0:2]
+        num_good -= 2
+        spies -= 2
+        roles = (good_special_roles + bad_special_roles[:-2]) + (Good_Roles[0:num_good] + Bad_Roles[0:spies])
     random.shuffle(roles)
     assignments = list(zip(roles, player_list))
     for assn in assignments:
